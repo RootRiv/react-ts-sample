@@ -1,8 +1,5 @@
 {
   // "extends": ["tslint:latest", "tslint-react", "tslint-config-prettier"],
-  "jsRules": {
-    "no-empty": true
-  },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",

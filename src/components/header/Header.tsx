@@ -6,6 +6,8 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import { withStyles, WithStyles } from '@material-ui/core/styles';
 import { TypographyProps } from '@material-ui/core/Typography';
+import { Drawer, List, ListItem, ListItemText } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const styles = () => {
   return {
@@ -19,6 +21,9 @@ const styles = () => {
       marginLeft: -12,
       marginRight: 20,
     },
+    list: {
+      width: 200,
+    },
   };
 };
 
@@ -31,18 +36,51 @@ interface IProps {
 type headerProps = IProps & WithStyles<typeof styles>;
 
 const Header: React.SFC<headerProps> = ({ type, color, classes }) => {
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const toggleDrawer = (isDrawer: boolean) => () => {
+    setIsOpen(isDrawer);
+  };
+
+  const sideList = (
+    <div className={classes.list}>
+        <List>
+            {
+              ['app', 'form'].map((text, index) => (
+                <ListItem button key={text} >
+                  <Link to={'/' + text}>
+                    <ListItemText primary={text} />
+                  </Link>
+                </ListItem>
+              ))
+            }
+        </List>
+    </div>
+  );
+
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>.
+            <MenuIcon onClick={toggleDrawer(!isOpen)}/>
+          </IconButton>
           <Typography variant={type} color={color} >
-            News
+            Menu
           </Typography>
         </Toolbar>
       </AppBar>
+
+      <Drawer open={isOpen} onClose={toggleDrawer(false)}>
+        <div
+          tabIndex={0}
+          role="button"
+          onClick={toggleDrawer(false)}
+          onKeyDown={toggleDrawer(false)}
+        >
+          {sideList}
+        </div>
+      </Drawer>
     </div>
   );
 };
