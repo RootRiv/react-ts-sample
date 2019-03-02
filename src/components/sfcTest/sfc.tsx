@@ -7,7 +7,7 @@ interface SfcProps {
 const Sfc: React.SFC<SfcProps> = ({ label }) => {
     return (
       <div className="sfc">
-        
+        { label }
       </div>
     );
 };
