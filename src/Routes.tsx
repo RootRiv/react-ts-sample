@@ -10,8 +10,8 @@ export class Routes extends React.Component {
   public render() {
     return (
       <div>
-        <h1>Route sample</h1>
         <Header color="textPrimary" type="h5"/>
+        <h1>Route sample</h1>
         <Switch>
           <Route exact={true} path="/" component={App} />
           <Route exact={true} path="/app" component={App} />

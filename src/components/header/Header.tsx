@@ -36,19 +36,22 @@ interface IProps {
 type headerProps = IProps & WithStyles<typeof styles>;
 
 const Header: React.SFC<headerProps> = ({ type, color, classes }) => {
+  // Stateの初期化
   const [isOpen, setIsOpen] = React.useState(false);
 
+  // Stateを変化させる処理
   const toggleDrawer = (isDrawer: boolean) => () => {
     setIsOpen(isDrawer);
   };
 
+  // Drawerの中身を作成
   const sideList = (
     <div className={classes.list}>
         <List>
             {
               ['app', 'form'].map((text, index) => (
                 <ListItem button key={text} >
-                  <Link to={'/' + text}>
+                  <Link to={`/${text}`}>
                     <ListItemText primary={text} />
                   </Link>
                 </ListItem>
@@ -60,7 +63,7 @@ const Header: React.SFC<headerProps> = ({ type, color, classes }) => {
 
   return (
     <div>
-      <AppBar position="fixed">
+      <AppBar position="relative">
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
             <MenuIcon onClick={toggleDrawer(!isOpen)}/>

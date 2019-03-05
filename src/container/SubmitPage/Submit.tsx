@@ -5,7 +5,8 @@ class Submit extends React.Component {
   public render() {
     return (
       <div className="Submit">
-        <Form label="test"/>
+        <h2>Form Test</h2>
+        <Form label="name"/>
       </div>
     );
   }
